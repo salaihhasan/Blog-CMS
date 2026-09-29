@@ -14,7 +14,7 @@
 import type { Blog, Category } from "../types/blog";
 
 const BASE_URL = (
-  import.meta.env.VITE_API_URL ?? "http://localhost:5001"
+  import.meta.env.VITE_API_URL ?? "https://blog-cms-sl0t.onrender.com"
 ).replace(/\/+$/, "");
 
 export const TOKEN_KEY = "token";
