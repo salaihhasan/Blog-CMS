@@ -1,0 +1,555 @@
+/* ============ Dark mode (PRD §41) ============ */
+/*
+ * The theme is driven by one attribute on <html>. Every stylesheet consumes
+ * the variables declared in public.css :root, so overriding them here covers
+ * the public site, the admin shell and the login page at once. The block at
+ * the bottom patches the handful of rules that hardcoded a light surface.
+ */
+
+:root[data-theme="dark"] {
+  --page-bg: #0e1116;
+  --card-bg: #161a21;
+  --chip-bg: #222732;
+  --ink: #e7e9ee;
+  --muted: #a8b0bd;
+  --muted-light: #8d95a3;
+  --border: #2b313c;
+  /* Lightened from #c2417f: the dark-mode value only reached 3.6:1 on the
+     card surface, below the 4.5:1 WCAG AA threshold for body text. */
+  --primary: #d95f96;
+  --primary-dark: #e879ab;
+  --primary-deep: #d95f96;
+  /* Stays dark so white text on these surfaces keeps 6.5:1. */
+  --primary-solid: #a33468;
+  --primary-solid-hover: #8f2a5c;
+
+  color-scheme: dark;
+}
+
+/* ---------- Stat cards (shared: admin dashboard + public About) ---------- */
+
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.stat-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px 18px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.stat-label {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.stat-value {
+  margin-top: 6px;
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.stat-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  background: #f6edf2;
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+:root[data-theme="dark"] .stat-icon {
+  background: #2a1f27;
+}
+
+/* ---------- Surfaces that hardcoded a light colour ---------- */
+
+:root[data-theme="dark"] .navbar,
+:root[data-theme="dark"] .footer,
+:root[data-theme="dark"] .mobile-menu,
+:root[data-theme="dark"] .empty-state {
+  background: var(--card-bg);
+}
+
+/*
+ * `background-color`, not the `background` shorthand: the shorthand would reset
+ * background-image/repeat/position and make the select chevrons tile.
+ */
+:root[data-theme="dark"] .digest-form input,
+:root[data-theme="dark"] .admin-header,
+:root[data-theme="dark"] .select,
+:root[data-theme="dark"] .toolbar-select,
+:root[data-theme="dark"] .search-box input,
+:root[data-theme="dark"] .editor-shell,
+:root[data-theme="dark"] .editor-select,
+:root[data-theme="dark"] .emoji-picker,
+:root[data-theme="dark"] .modal,
+:root[data-theme="dark"] .login-input,
+:root[data-theme="dark"] .login-password {
+  background-color: var(--card-bg);
+  color: var(--ink);
+}
+
+/*
+ * The selects carry a chevron baked into a data-URI background image, so the
+ * arrow needs recolouring too, and repeat/position must be restated because
+ * the base rule sets them separately.
+ */
+:root[data-theme="dark"] .select,
+:root[data-theme="dark"] .toolbar-select {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%239aa1ad' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-color: var(--card-bg);
+  color: var(--ink);
+}
+
+/* Native option lists follow the OS, so give them explicit colours too. */
+:root[data-theme="dark"] .select option,
+:root[data-theme="dark"] .toolbar-select option,
+:root[data-theme="dark"] .editor-select option {
+  background-color: #1b2029;
+  color: var(--ink);
+}
+
+:root[data-theme="dark"] .editor-toolbar,
+:root[data-theme="dark"] .editor-foot {
+  background: #12161c;
+}
+
+:root[data-theme="dark"] .btn-outline,
+:root[data-theme="dark"] .btn-danger-outline,
+:root[data-theme="dark"] .chip,
+:root[data-theme="dark"] .page-btn {
+  background: transparent;
+  color: var(--ink);
+  border-color: var(--border);
+}
+
+:root[data-theme="dark"] .btn-outline:hover,
+:root[data-theme="dark"] .chip:hover,
+:root[data-theme="dark"] .page-btn:hover:not(:disabled) {
+  background: var(--chip-bg);
+}
+
+:root[data-theme="dark"] .table tbody tr:hover {
+  background: #1b202a;
+}
+
+:root[data-theme="dark"] .side-logout:hover {
+  background: #1f242e;
+}
+
+:root[data-theme="dark"] .danger-zone {
+  background: #1f1517;
+}
+
+:root[data-theme="dark"] .badge-archived {
+  background: #2a2f3a;
+  color: var(--muted);
+}
+
+:root[data-theme="dark"] .switch::after {
+  background: #cfd4dc;
+}
+
+/* ---------- Article body in dark ---------- */
+
+:root[data-theme="dark"] .article-body {
+  color: #dfe3ea;
+}
+
+:root[data-theme="dark"] .article-body blockquote {
+  color: var(--muted);
+}
+
+:root[data-theme="dark"] .article-body code,
+:root[data-theme="dark"] .editor-content .tiptap code {
+  background: #222732;
+  color: #e7e9ee;
+}
+
+/* ---------- Admin preview modal ---------- */
+
+.preview-modal {
+  width: min(880px, 94vw);
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.preview-scroll {
+  margin-top: 16px;
+  overflow-y: auto;
+  padding: 4px 4px 4px 0;
+}
+
+.preview-scroll .article {
+  text-align: left;
+}
+
+/* ---------- Share buttons ---------- */
+
+.share-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 28px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+}
+
+.share-label {
+  color: var(--muted);
+  font-size: 13.5px;
+  margin-right: 4px;
+}
+
+.share-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--ink);
+  font-size: 13px;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.share-btn:hover {
+  background: var(--chip-bg);
+}
+
+/* ---------- Sort control ---------- */
+
+.list-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+
+.list-controls .select {
+  min-width: 160px;
+}
+
+/* ---------- Prose / about + contact ---------- */
+
+.prose {
+  max-width: 68ch;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.75;
+}
+
+.prose h2 {
+  color: var(--ink);
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+
+.prose p {
+  margin-bottom: 14px;
+}
+
+.prose a,
+.link-btn {
+  color: var(--primary);
+  text-decoration: underline;
+}
+
+.contact-form {
+  max-width: 560px;
+}
+
+.contact-form .field {
+  margin-bottom: 16px;
+}
+
+.contact-form .form-msg {
+  margin-top: 12px;
+}
+
+:root[data-theme="dark"] .contact-form .input,
+:root[data-theme="dark"] .contact-form .textarea,
+:root[data-theme="dark"] .contact-form .select,
+:root[data-theme="dark"] .contact-form .toolbar-select {
+  background: var(--card-bg);
+  color: var(--ink);
+  border-color: var(--border);
+}
+
+:root[data-theme="dark"] .input,
+:root[data-theme="dark"] .textarea {
+  background: var(--card-bg);
+  color: var(--ink);
+  border-color: var(--border);
+}
+
+/* ---------- Media library grid ---------- */
+
+.media-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 16px;
+  padding: 18px;
+}
+
+.media-tile {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--card-bg);
+}
+
+.media-thumb {
+  aspect-ratio: 16 / 10;
+  background: var(--chip-bg);
+}
+
+.media-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.media-tile figcaption {
+  padding: 10px 12px 12px;
+}
+
+.media-tile .cell-strong {
+  font-size: 13px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.media-tile .cell-sub {
+  color: var(--muted);
+  font-size: 12px;
+  margin-top: 2px;
+}
+
+.media-posts {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.media-posts a {
+  font-size: 12px;
+  color: var(--primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.media-posts a:hover {
+  text-decoration: underline;
+}
+
+/* ---------- Responsive: PRD §42 (1440 / 1024 / 768 / 390) ---------- */
+
+@media (max-width: 768px) {
+  .list-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .list-controls .select {
+    width: 100%;
+  }
+
+  .share-btn {
+    flex: 1 1 auto;
+    justify-content: center;
+  }
+
+  .preview-modal {
+    width: 100vw;
+    max-height: 100vh;
+    border-radius: 0;
+  }
+
+  .media-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 12px;
+    padding: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Keep the editor toolbar from overflowing on small phones. */
+  .editor-select {
+    flex: 1 1 calc(50% - 4px);
+    min-width: 0;
+  }
+
+  .emoji-picker {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .editor-hint {
+    display: none;
+  }
+
+  .stat-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* ---------- Admin tables on narrow screens (PRD §42, 390px) ---------- */
+/*
+ * A five-column table cannot fit a phone: the Date and Actions columns were
+ * being clipped. Below 640px each row becomes a stacked card and every cell
+ * carries its column name via data-label, so no data is hidden.
+ */
+
+@media (max-width: 640px) {
+  .table-wrap {
+    overflow-x: visible;
+  }
+
+  .table,
+  .table tbody,
+  .table tr,
+  .table td {
+    display: block;
+    width: 100%;
+  }
+
+  .table thead {
+    display: none;
+  }
+
+  .table tr {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin-bottom: 12px;
+    padding: 6px 4px;
+    background: var(--card-bg);
+  }
+
+  .table tbody tr:hover {
+    background: var(--card-bg);
+  }
+
+  .table td {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    padding: 9px 12px;
+    border: 0;
+    text-align: right;
+  }
+
+  /* The label comes from the cell's data-label attribute. */
+  .table td::before {
+    content: attr(data-label);
+    flex: 0 0 auto;
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-align: left;
+  }
+
+  /* The title cell reads better as a block with its label above it. */
+  .table td[data-label="Title"] {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    text-align: left;
+    padding-bottom: 4px;
+  }
+
+  .table td[data-label="Title"] .cell-strong {
+    font-size: 15px;
+    line-height: 1.35;
+  }
+
+  /* Actions deserve a full-width row of their own. */
+  .table td[data-label="Actions"] {
+    justify-content: flex-end;
+    padding-top: 4px;
+    border-top: 1px solid var(--border);
+    margin-top: 4px;
+  }
+
+  .table td[data-label="Actions"]::before {
+    margin-right: auto;
+  }
+
+  .table .row-actions {
+    justify-content: flex-end;
+  }
+
+  .table-foot {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .pagination {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+}
+
+/* ---------- Table row tints ---------- */
+
+:root {
+  --row-hover: #fbfaf9;
+  --row-selected: #faf3f6;
+}
+
+:root[data-theme="dark"] {
+  /* The light tints stayed pink in dark mode, dropping .cell-sub to 2:1. */
+  --row-hover: #1b202a;
+  --row-selected: #241c22;
+}
+
+/* ---------- Category label tones ---------- */
+/*
+ * The six tones are chosen by labelTone() so any category from the API gets a
+ * stable colour. They are dark inks suited to white, so dark mode needs
+ * lighter equivalents to clear 4.5:1 on the card surface.
+ */
+
+:root[data-theme="dark"] .post-label.c0 { color: #a5b4fc; }
+:root[data-theme="dark"] .post-label.c1 { color: #93c5fd; }
+:root[data-theme="dark"] .post-label.c2 { color: #d8b4fe; }
+:root[data-theme="dark"] .post-label.c3 { color: #5eead4; }
+:root[data-theme="dark"] .post-label.c4 { color: #fcd34d; }
+:root[data-theme="dark"] .post-label.c5 { color: #fda4af; }
+
+/* ---------- Auto-save (PRD §66) ---------- */
+
+.autosave-note {
+  margin-top: 8px;
+  font-size: 12px;
+  color: var(--muted);
+}

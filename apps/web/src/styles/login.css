@@ -1,0 +1,299 @@
+/* ============ Admin login ============ */
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 16px;
+  background: var(--page-bg);
+}
+
+.login-card {
+  width: 100%;
+  max-width: 436px;
+  background: var(--card-bg);
+  border-radius: 16px;
+  padding: 32px 24px;
+  box-shadow:
+    0 12px 32px rgba(24, 24, 27, 0.07),
+    0 2px 6px rgba(24, 24, 27, 0.04);
+}
+
+.login-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.login-mark {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: var(--primary-solid);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-brand-name {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.login-title {
+  margin-top: 18px;
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  text-align: center;
+  color: var(--ink);
+}
+
+.login-subtitle {
+  margin-top: 8px;
+  font-size: 15px;
+  color: var(--muted);
+  text-align: center;
+}
+
+.login-form {
+  margin-top: 24px;
+}
+
+.login-alert {
+  margin-bottom: 20px;
+  padding: 11px 14px;
+  border: 1px solid #fecaca;
+  border-radius: 8px;
+  background: #fef2f2;
+  color: #dc2626;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.login-field {
+  margin-top: 20px;
+}
+
+.login-label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.login-input {
+  width: 100%;
+  height: 40px;
+  /* No global reset in this codebase, and `width: 100%` plus horizontal
+     padding would overflow the field without border-box sizing. */
+  box-sizing: border-box;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0 12px;
+  background: #fff;
+  color: var(--ink);
+  font-size: 15px;
+  font-family: inherit;
+}
+
+.login-input::placeholder {
+  color: var(--muted-light);
+}
+
+.login-input:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: 1px;
+  border-color: var(--primary);
+}
+
+.login-input[aria-invalid="true"] {
+  border-color: #ef4444;
+}
+
+/* Flex so the wrapper is exactly as tall as the input. A plain block wrapper
+   adds the inline-block input's descender gap underneath, which would make the
+   eye's `top: 50%` land below the field's true centre. */
+.login-password {
+  position: relative;
+  display: flex;
+}
+
+.login-password .login-input {
+  /* Room for the eye, which now sits inside the field's border. */
+  padding-right: 44px;
+}
+
+.login-password:focus-within .login-input {
+  border-color: var(--primary);
+}
+
+.login-password.has-error .login-input {
+  border-color: #ef4444;
+}
+
+/* Absolutely positioned so it renders inside the field's own border box.
+   The wrapper is a flex container (above), so `top: 50%` is measured against a
+   box exactly as tall as the input and the eye stays centred. */
+.login-eye {
+  position: absolute;
+  top: 50%;
+  right: 6px;
+  transform: translateY(-50%);
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  border-radius: 6px;
+  color: var(--muted-light);
+  transition: color 0.15s, background 0.15s;
+}
+
+.login-eye:hover {
+  color: var(--ink);
+  background: var(--chip-bg);
+}
+
+.login-hint {
+  margin-top: 6px;
+  font-size: 12px;
+  color: #dc2626;
+}
+
+.login-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px 16px;
+  margin-top: 16px;
+}
+
+.login-remember {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.login-remember input {
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  accent-color: var(--primary);
+}
+
+.login-forgot {
+  padding: 0;
+  border: none;
+  background: none;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--primary);
+  cursor: pointer;
+}
+
+.login-forgot:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.login-submit {
+  width: 100%;
+  height: 44px;
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  border-radius: 8px;
+  background: var(--primary-solid);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  transition: background 0.15s;
+}
+
+.login-submit:hover:not(:disabled) {
+  background: var(--primary-solid-hover);
+}
+
+.login-submit:disabled {
+  cursor: default;
+}
+
+.login-spinner {
+  width: 15px;
+  height: 15px;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: login-spin 0.7s linear infinite;
+}
+
+@keyframes login-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.login-signup {
+  display: none;
+  margin-top: 16px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.login-help {
+  margin-top: 24px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+@media (max-width: 1023px) {
+  .login-signup {
+    display: block;
+  }
+}
+
+@media (min-width: 768px) {
+  .login-card {
+    padding: 40px;
+  }
+
+  .login-title {
+    font-size: 30px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .login-title {
+    margin-top: 16px;
+  }
+
+  .login-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
+
+  .login-submit {
+    height: 40px;
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "name": "with-vite",
+  "private": true,
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+  },
+  "devDependencies": {
+    "@types/jsonwebtoken": "^9.0.10",
+    "eslint": "10.9.1",
+    "prettier": "3.9.6",
+    "turbo": "^2.11.3"
+  },
+  "engines": {
+    "node": ">=24.20.0"
+  },
+  "packageManager": "npm@11.12.1",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "dependencies": {
+    "cloudinary": "^2.11.0",
+    "jsonwebtoken": "^9.0.3",
+    "multer": "^2.4.0"
+  }
+}
