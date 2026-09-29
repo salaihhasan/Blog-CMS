@@ -1,0 +1,16 @@
+.DS_Store
+node_modules
+.turbo
+*.log
+dist
+dist-ssr
+*.local
+.env
+.cache
+server/dist
+public/dist
+Blog CMS 2025 Batch.md
+UI/
+
+# Local admin seed script
+apps/backend/src/scripts/createAdmin.ts
