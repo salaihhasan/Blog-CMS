@@ -12,7 +12,29 @@ import { errorMiddleware } from "./middleware/errorMiddleware.js";
 
 const app = express();
 
-app.use(cors({ origin: "https://blog-cms-9upg.vercel.app/" }));
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://blog-cms-9upg.vercel.app",
+  "https://blog-cms-9upg-neq5thzck-codex-bd87.vercel.app/"           
+];
+
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      if (
+        !origin ||
+        allowedOrigins.includes(origin) ||
+        /^https:\/\/blog-cms-.*\.vercel\.app$/.test(origin)
+      ) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true,  
+  })
+);
+
 app.use(express.json());
 
 
