@@ -12,7 +12,7 @@ import { errorMiddleware } from "./middleware/errorMiddleware.js";
 
 const app = express();
 
-app.use(cors({ origin: "http://localhost:5173" }));
+app.use(cors({ origin: "https://blog-cms-9upg.vercel.app/" }));
 app.use(express.json());
 
 
@@ -33,6 +33,7 @@ connectDB();
 
 app.use(errorMiddleware);
 
-app.listen(5001, () => {
+const PORT = process.env.PORT || 5001;
+app.listen(PORT, () => {
   console.log("Backend running on http://localhost:5001");
 });
